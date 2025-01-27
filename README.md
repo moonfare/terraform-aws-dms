@@ -298,20 +298,20 @@ Examples codified under the [`examples`](https://github.com/terraform-aws-module
 - [Complete](https://github.com/terraform-aws-modules/terraform-aws-dms/tree/master/examples/complete)
 - [Serverless](https://github.com/terraform-aws-modules/terraform-aws-dms/tree/master/examples/serverless)
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.32 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.83 |
 | <a name="requirement_time"></a> [time](#requirement\_time) | >= 0.9 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.32 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.83 |
 | <a name="provider_time"></a> [time](#provider\_time) | >= 0.9 |
 
 ## Modules
@@ -378,6 +378,7 @@ No modules.
 | <a name="input_event_subscriptions"></a> [event\_subscriptions](#input\_event\_subscriptions) | Map of objects that define the event subscriptions to be created | `any` | `{}` | no |
 | <a name="input_iam_role_permissions_boundary"></a> [iam\_role\_permissions\_boundary](#input\_iam\_role\_permissions\_boundary) | ARN of the policy that is used to set the permissions boundary for the role | `string` | `null` | no |
 | <a name="input_iam_role_tags"></a> [iam\_role\_tags](#input\_iam\_role\_tags) | A map of additional tags to apply to the DMS IAM roles | `map(string)` | `{}` | no |
+| <a name="input_repl_config_timeouts"></a> [repl\_config\_timeouts](#input\_repl\_config\_timeouts) | A map of timeouts for serverless replication config create/update/delete operations | `map(string)` | `{}` | no |
 | <a name="input_repl_instance_allocated_storage"></a> [repl\_instance\_allocated\_storage](#input\_repl\_instance\_allocated\_storage) | The amount of storage (in gigabytes) to be initially allocated for the replication instance. Min: 5, Max: 6144, Default: 50 | `number` | `null` | no |
 | <a name="input_repl_instance_allow_major_version_upgrade"></a> [repl\_instance\_allow\_major\_version\_upgrade](#input\_repl\_instance\_allow\_major\_version\_upgrade) | Indicates that major version upgrades are allowed | `bool` | `true` | no |
 | <a name="input_repl_instance_apply_immediately"></a> [repl\_instance\_apply\_immediately](#input\_repl\_instance\_apply\_immediately) | Indicates whether the changes should be applied immediately or during the next maintenance window | `bool` | `null` | no |
@@ -430,7 +431,7 @@ No modules.
 | <a name="output_replication_tasks"></a> [replication\_tasks](#output\_replication\_tasks) | A map of maps containing the replication tasks created and their full output of attributes and values |
 | <a name="output_s3_endpoints"></a> [s3\_endpoints](#output\_s3\_endpoints) | A map of maps containing the S3 endpoints created and their full output of attributes and values |
 | <a name="output_serverless_replication_tasks"></a> [serverless\_replication\_tasks](#output\_serverless\_replication\_tasks) | A map of maps containing the serverless replication tasks (replication\_config) created and their full output of attributes and values |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
 
 ## License
 

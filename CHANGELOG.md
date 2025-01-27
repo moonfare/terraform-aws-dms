@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.5.0](https://github.com/terraform-aws-modules/terraform-aws-dms/compare/v2.4.0...v2.5.0) (2025-01-18)
+
+
+### Features
+
+* Support `kafka_settings.sasl_mechanism` and `resource_identifier` ([#86](https://github.com/terraform-aws-modules/terraform-aws-dms/issues/86)) ([692d07d](https://github.com/terraform-aws-modules/terraform-aws-dms/commit/692d07d2de0c6bac1b47f51ab2cefde22a4bab1e))
+
+## [2.4.0](https://github.com/terraform-aws-modules/terraform-aws-dms/compare/v2.3.0...v2.4.0) (2024-11-18)
+
+
+### Features
+
+* Make repl config timeouts configurable ([#82](https://github.com/terraform-aws-modules/terraform-aws-dms/issues/82)) ([491f197](https://github.com/terraform-aws-modules/terraform-aws-dms/commit/491f1979be843aa462f21860cc11932f953b6d12))
+
+
+### Bug Fixes
+
+* Update CI workflow versions to latest ([#74](https://github.com/terraform-aws-modules/terraform-aws-dms/issues/74)) ([060e894](https://github.com/terraform-aws-modules/terraform-aws-dms/commit/060e89496b3925aa659181a14441636e56c0b696))
+
+## [2.3.0](https://github.com/terraform-aws-modules/terraform-aws-dms/compare/v2.2.1...v2.3.0) (2024-09-09)
+
+
+### Features
+
+* Support externally created source and target endpoint ARNs ([#72](https://github.com/terraform-aws-modules/terraform-aws-dms/issues/72)) ([2575ab3](https://github.com/terraform-aws-modules/terraform-aws-dms/commit/2575ab325d4855b5f816fbb2f3acd0745697d0d1))
+
+## [2.2.1](https://github.com/terraform-aws-modules/terraform-aws-dms/compare/v2.2.0...v2.2.1) (2024-03-07)
+
+
+### Bug Fixes
+
+* Update CI workflow versions to remove deprecated runtime warnings ([#61](https://github.com/terraform-aws-modules/terraform-aws-dms/issues/61)) ([b56e19e](https://github.com/terraform-aws-modules/terraform-aws-dms/commit/b56e19e8387a9cb35a043e33f665b6905716c0dd))
+
 ## [2.2.0](https://github.com/terraform-aws-modules/terraform-aws-dms/compare/v2.1.0...v2.2.0) (2024-02-02)
 
 

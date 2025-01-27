@@ -126,23 +126,6 @@ module "dms_aurora_postgresql_aurora_mysql" {
       tags = { EndpointType = "postgresql-destination" }
     }
 
-    postgresql-source = {
-      database_name               = local.db_name
-      endpoint_id                 = "${local.name}-postgresql-source"
-      endpoint_type               = "source"
-      engine_name                 = "aurora-postgresql"
-      extra_connection_attributes = "heartbeatFrequency=1;secretsManagerEndpointOverride=${module.vpc_endpoints.endpoints["secretsmanager"]["dns_entry"][0]["dns_name"]}"
-      secrets_manager_arn         = module.secrets_manager_postgresql.secret_arn
-
-      postgres_settings = {
-        capture_ddls        = false
-        heartbeat_enable    = true
-        heartbeat_frequency = 1
-      }
-
-      tags = { EndpointType = "postgresql-source" }
-    }
-
     mysql-destination = {
       database_name               = local.db_name
       endpoint_id                 = "${local.name}-mysql-destination"
@@ -165,6 +148,7 @@ module "dms_aurora_postgresql_aurora_mysql" {
         include_control_details = true
         include_null_and_empty  = true
         message_format          = "json"
+        sasl_mechanism          = "scram-sha-512"
         sasl_password           = local.sasl_scram_credentials["password"]
         sasl_username           = local.sasl_scram_credentials["username"]
         security_protocol       = "sasl-ssl"
@@ -190,7 +174,7 @@ module "dms_aurora_postgresql_aurora_mysql" {
       migration_type            = "full-load-and-cdc"
       replication_task_settings = file("configs/task_settings.json")
       table_mappings            = file("configs/table_mappings.json")
-      source_endpoint_key       = "postgresql-source"
+      source_endpoint_arn       = aws_dms_endpoint.postgresql_source.endpoint_arn
       target_endpoint_key       = "mysql-destination"
       tags                      = { Task = "PostgreSQL-to-MySQL" }
     }
@@ -199,7 +183,7 @@ module "dms_aurora_postgresql_aurora_mysql" {
       migration_type            = "full-load-and-cdc"
       replication_task_settings = file("configs/task_settings.json")
       table_mappings            = file("configs/kafka_mappings.json")
-      source_endpoint_key       = "postgresql-source"
+      source_endpoint_arn       = aws_dms_endpoint.postgresql_source.endpoint_arn
       target_endpoint_key       = "kafka-destination"
       tags                      = { Task = "PostgreSQL-to-Kafka" }
     }
@@ -527,4 +511,23 @@ module "secrets_manager_mysql" {
   kms_key_id = aws_kms_key.this.id
 
   tags = local.tags
+}
+
+resource "aws_dms_endpoint" "postgresql_source" {
+  database_name               = local.db_name
+  endpoint_id                 = "${local.name}-postgresql-source"
+  endpoint_type               = "source"
+  engine_name                 = "aurora-postgresql"
+  extra_connection_attributes = "heartbeatFrequency=1;secretsManagerEndpointOverride=${module.vpc_endpoints.endpoints["secretsmanager"]["dns_entry"][0]["dns_name"]}"
+
+  secrets_manager_arn             = module.secrets_manager_postgresql.secret_arn
+  secrets_manager_access_role_arn = module.dms_aurora_postgresql_aurora_mysql.access_iam_role_arn
+
+  postgres_settings {
+    capture_ddls        = false
+    heartbeat_enable    = true
+    heartbeat_frequency = 1
+  }
+
+  tags = { EndpointType = "postgresql-source" }
 }
